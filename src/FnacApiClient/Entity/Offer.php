@@ -50,6 +50,7 @@ class Offer extends Entity
     private $description;
     private $internal_comment;
     private $showcase;
+    private $is_shipping_free;
     private $promotion;
 
     const STATE_NEW             = 11;    
@@ -115,6 +116,10 @@ class Offer extends Entity
             $data['showcase'] = $this->showcase;
         }
 
+        if (!is_null($this->is_shipping_free)) {
+            $data['is_shipping_free'] = $this->is_shipping_free;
+        }
+
         if (!is_null($this->treatment)) {
             $data['treatment'] = $this->treatment;
         }
@@ -148,6 +153,7 @@ class Offer extends Entity
         $this->image = $data['image'];
         $this->nb_messages = $data['nb_messages'];
         $this->showcase = (integer) $data['showcase'];
+        $this->is_shipping_free = (bool) $data['is_shipping_free'];
 
         $this->offer_reference = $this->offer_fnac_id;
         $this->offer_reference_type = ProductType::ITEM_ID;
@@ -282,6 +288,16 @@ class Offer extends Entity
     public function setShowcase($showcase)
     {
         $this->showcase = $showcase;
+    }
+
+    /**
+     * Set if shipping is free
+     *
+     * @param bool $is_shipping_free
+     */
+    public function setIsShippingFree($is_shipping_free)
+    {
+        $this->is_shipping_free = $is_shipping_free;
     }
 
     /**
@@ -458,6 +474,16 @@ class Offer extends Entity
     public function getShowcase()
     {
         return $this->showcase;
+    }
+
+    /**
+     * Is shipping free
+     *
+     * @return bool
+     */
+    public function getIsShippingFree()
+    {
+        return $this->is_shipping_free;
     }
 
     /**
